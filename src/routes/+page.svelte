@@ -14,7 +14,6 @@
         align-items: center;
         justify-content: center;
         gap: 1rem;
-        height: 100vh;
     }
     h1 {
         color: #fb771a;

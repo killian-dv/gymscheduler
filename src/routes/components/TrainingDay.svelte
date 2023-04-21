@@ -1,4 +1,5 @@
 <script>
+    import TrainingDayDetails from "./TrainingDayDetails.svelte";
     let nbOfDays = [
         {id: 1, text: "1 jour", value: [1]},
         {id: 2, text: "2 jours", value: [1, 2]},
@@ -12,6 +13,25 @@
 
 </script>
 
+<style>
+    .all-days {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(auto, 1fr);
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+        background-color: #efefef;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    .one-day {
+        background-color: #fb771a;
+        padding: 1rem;
+        border-radius: 1rem;
+        color: white;
+    }
+</style>
+
 <form>
     <select bind:value={nbDaysTrainingPerWeek}>
     {#each nbOfDays as day (day.id)}
@@ -20,3 +40,13 @@
     </select>
 </form>
 {JSON.stringify(nbDaysTrainingPerWeek)}
+{#if nbDaysTrainingPerWeek}
+    <div class="all-days">
+        {#each nbDaysTrainingPerWeek.value as dayNumber, i}
+            <div class="one-day">
+                <TrainingDayDetails title={`Jour ${++i}`} />
+            </div>
+        {/each}
+    </div>
+{/if}
+
