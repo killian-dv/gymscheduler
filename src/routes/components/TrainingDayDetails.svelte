@@ -1,4 +1,6 @@
 <script>
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
     export let title;
     let exercise = {
         activity: "",
@@ -10,7 +12,7 @@
 
     function handleSubmit(event) {
         exercises = [...exercises, {... exercise}];
-        console.log(exercises);
+        dispatch("add-exercise", {...exercises, title: title});
     }
 </script>
 <style>
@@ -82,5 +84,10 @@
             </div>
             <button type="submit">Ajouter</button>
         </form>
+    </div>
+    <div>
+        {#each exercises as exercise}
+            <li>{exercise.activity} : {exercise.sets} séries de {exercise.reps}</li>
+        {/each}
     </div>
 </div>

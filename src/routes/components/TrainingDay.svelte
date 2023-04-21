@@ -1,5 +1,7 @@
 <script>
     import TrainingDayDetails from "./TrainingDayDetails.svelte";
+    import TrainingWeekSummary from "./TrainingWeekSummary.svelte";
+
     let nbOfDays = [
         {id: 1, text: "1 jour", value: [1]},
         {id: 2, text: "2 jours", value: [1, 2]},
@@ -9,13 +11,19 @@
         {id: 6, text: "6 jours", value: [1, 2, 3, 4, 5, 6]},
         {id: 7, text: "7 jours", value: [1, 2, 3, 4, 5, 6, 7]},
     ];
+    let summary = [];
     let nbDaysTrainingPerWeek;
 
+    function handleNewExercise(event) {
+        console.log(event.detail);
+        summary = [...summary, event.detail];
+    }
 </script>
 
 <style>
     .all-days {
         display: grid;
+        width: 90%;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(auto, 1fr);
         grid-column-gap: 1rem;
@@ -44,9 +52,10 @@
     <div class="all-days">
         {#each nbDaysTrainingPerWeek.value as dayNumber, i}
             <div class="one-day">
-                <TrainingDayDetails title={`Jour ${++i}`} />
+                <TrainingDayDetails title={`Jour ${++i}`} on:add-exercise={handleNewExercise} />
             </div>
         {/each}
     </div>
+    <TrainingWeekSummary />
 {/if}
 
