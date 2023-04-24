@@ -1,7 +1,6 @@
 <script>
     import { onMount } from "svelte";
     export let summary;
-    export let days;
     let formattedData;
     let isDataFormatted = false;
 
