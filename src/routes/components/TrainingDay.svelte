@@ -18,11 +18,11 @@
     function handleNewExercise(event) {
         console.log(event.detail);
         summary = [...summary, event.detail];
+        isSummaryReady = false
     }
 
     function generateSummary() {
         isSummaryReady = true;
-        console.log(summary);
     }
 </script>
 
@@ -44,6 +44,15 @@
         border-radius: 1rem;
         color: white;
     }
+    button {
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        background-color: #7adec9;
+        color: white;
+        cursor: pointer;
+    }
 </style>
 
 <form>
@@ -53,7 +62,6 @@
     {/each}
     </select>
 </form>
-{JSON.stringify(nbDaysTrainingPerWeek)}
 {#if nbDaysTrainingPerWeek}
     <div class="all-days">
         {#each nbDaysTrainingPerWeek.value as dayNumber, i}
@@ -62,7 +70,9 @@
             </div>
         {/each}
     </div>
+    {#if isSummaryReady}
     <TrainingWeekSummary summary={summary} days={nbDaysTrainingPerWeek.value.length}/>
+    {/if}
     <button on:click={generateSummary}>Générer mon résumé</button>
 {/if}
 

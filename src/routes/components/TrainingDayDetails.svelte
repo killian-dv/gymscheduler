@@ -11,8 +11,8 @@
     let exercises = [];
 
     function handleSubmit(event) {
-        exercises = [...exercises, {... exercise}];
-        dispatch("add-exercise", {...exercises, title: title});
+        exercises = [...exercises, { ...exercise }];
+        dispatch("add-exercise", { ...exercise, title: title });
     }
 </script>
 <style>
@@ -86,8 +86,10 @@
         </form>
     </div>
     <div>
-        {#each exercises as exercise}
-            <li>{exercise.activity} : {exercise.sets} séries de {exercise.reps}</li>
-        {/each}
+        <ul>
+            {#each exercises as exercise}
+                <li>{exercise.activity} : {exercise.sets} séries de {exercise.reps}</li>
+            {/each}
+        </ul>
     </div>
 </div>
